@@ -4,9 +4,10 @@ require 'mustache/sinatra'
 
 class App < Sinatra::Base
   register Mustache::Sinatra
+  require 'views/layout'
 
   set :mustache, {
-    :tempaltes => "./templates",
+    :templates => "./templates",
     :views => "./views"
   }
 
@@ -25,7 +26,7 @@ class App < Sinatra::Base
       @page = page
       @name = name
       @content = page.formatted_data
-      return @content
+      mustache :page
     end
   end
 end
