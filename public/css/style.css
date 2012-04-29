@@ -16,6 +16,7 @@ body {
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
     border-style: solid;
+    border-top-style: none;
     border-width: 1px;
     border-color: lightgray;
 }
