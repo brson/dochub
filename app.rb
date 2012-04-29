@@ -12,7 +12,11 @@ class App < Sinatra::Base
   }
 
   get '/' do
-    'Hello World'
+    'Welcome to dochub'
+  end
+
+  get '/:user/:repo/:name' do
+    show_page_or_file(params[:user], params[:repo], params[:name])
   end
 
   get '/:user/:repo' do
@@ -20,8 +24,10 @@ class App < Sinatra::Base
   end
 
   def show_page_or_file(user, repo, name)
-    dir = @dir
-    wiki = Gollum::Wiki.new("./data/#{user}/#{repo}.wiki")
+    options = {
+      :base_path => "/#{user}/#{repo}/"
+    }
+    wiki = Gollum::Wiki.new("./data/#{user}/#{repo}.wiki", options)
     if page = wiki.page(name)
       @page = page
       @name = name
