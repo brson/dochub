@@ -40,6 +40,8 @@ class App < Sinatra::Base
 
     if page = wiki.page(name)
       @page = page
+      @user = user
+      @repo = repo
       @name = name
       mustache :page
     else

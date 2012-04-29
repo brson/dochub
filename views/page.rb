@@ -1,6 +1,6 @@
 module Views
   class Page < Layout
-    attr_reader :page, :name
+    attr_reader :page, :user, :repo, :name
 
     DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
