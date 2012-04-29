@@ -15,5 +15,14 @@ module Views
       has_sidebar && @sidebar.formatted_data
     end
 
+    def has_footer
+      @footer = (@page.footer || false) if @footer.nil?
+      !!@footer
+    end
+
+    def footer_content
+      has_footer && @footer.formatted_data
+    end
+
   end
 end

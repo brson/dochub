@@ -5,9 +5,18 @@
 <div id="wiki-content">
   {{{content}}}
 
+  {{#has_sidebar}}
   <div id="wiki-sidebar">
     {{{sidebar_content}}}
   </div>
+  {{/has_sidebar}}
+
+  {{#has_footer}}
+  <div id="wiki-footer">
+    {{{footer_content}}}
+  </div>
+  {{/has_footer}}
+
 </div>
 
 </div>
