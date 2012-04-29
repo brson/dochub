@@ -1,11 +1,15 @@
 require 'grit'
 require 'sinatra/base'
-require 'gollum'
 require 'mustache/sinatra'
+require 'gitter'
 
 class App < Sinatra::Base
   register Mustache::Sinatra
   require 'views/layout'
+
+  configure :production, :development do
+    enable :logging
+  end
 
   set :public_folder, "./public"
 
@@ -13,6 +17,8 @@ class App < Sinatra::Base
     :templates => "./templates",
     :views => "./views"
   }
+
+  set :gitter, Gitter.new
 
   get '/' do
     'Welcome to dochub'
@@ -28,13 +34,9 @@ class App < Sinatra::Base
 
   def show_page_or_file(user, repo, name)
 
-    options = {
-      :base_path => "/#{user}/#{repo}/"
-    }
+    wiki = settings.gitter.wiki(user, repo)
 
-    begin
-      wiki = Gollum::Wiki.new("./data/#{user}/#{repo}.wiki", options)
-    rescue Grit::NoSuchPathError
+    if !wiki
       return error_unknown_repo(user, repo)
     end
 
