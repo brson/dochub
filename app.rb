@@ -31,7 +31,6 @@ class App < Sinatra::Base
     if page = wiki.page(name)
       @page = page
       @name = name
-      @content = page.formatted_data
       mustache :page
     end
   end
