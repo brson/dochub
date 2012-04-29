@@ -1,8 +1,24 @@
+.row {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+body {
+    background: #F8F8F8;
+}
+
 #main-container {
-    margin-top: 5em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 2em;
+    background-color: white;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
 }
 
 #githublink {
     float: right;
-    margin-bottom: 2em;
 }
