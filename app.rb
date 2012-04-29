@@ -6,6 +6,8 @@ class App < Sinatra::Base
   register Mustache::Sinatra
   require 'views/layout'
 
+  set :public_folder, "./public"
+
   set :mustache, {
     :templates => "./templates",
     :views => "./views"

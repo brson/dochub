@@ -2,8 +2,22 @@ module Views
   class Page < Layout
     attr_reader :page, :name
 
+    DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+    def author
+      @page.version.author.name
+    end
+
+    def date
+      @page.version.authored_date.strftime(DATE_FORMAT)
+    end
+
     def content
       @page.formatted_data
+    end
+
+    def format
+      @page.format.to_s
     end
 
     def has_sidebar
@@ -15,6 +29,10 @@ module Views
       has_sidebar && @sidebar.formatted_data
     end
 
+    def sidebar_format
+      has_sidebar && @sidebar.format.to_s
+    end
+
     def has_footer
       @footer = (@page.footer || false) if @footer.nil?
       !!@footer
@@ -22,6 +40,10 @@ module Views
 
     def footer_content
       has_footer && @footer.formatted_data
+    end
+
+    def footer_format
+      has_footer && @footer.format.to_s
     end
 
   end
