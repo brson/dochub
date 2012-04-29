@@ -35,7 +35,7 @@ class App < Sinatra::Base
     begin
       wiki = Gollum::Wiki.new("./data/#{user}/#{repo}.wiki", options)
     rescue Grit::NoSuchPathError
-      return show_unknown_repo(user, repo, name)
+      return error_unknown_repo(user, repo)
     end
 
     if page = wiki.page(name)
@@ -43,12 +43,16 @@ class App < Sinatra::Base
       @name = name
       mustache :page
     else
-      "I don't know page #{name}"
+      error_unknown_page(name)
     end
   end
 
-  def show_unknown_repo(user, repo, name)
+  def error_unknown_repo(user, repo)
     "I don't know #{user} / #{repo} yet"
+  end
+
+  def error_unknown_page(name)
+      "I don't know page #{name}"
   end
 
 end
