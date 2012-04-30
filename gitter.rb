@@ -80,7 +80,7 @@ class Gitter
     repo.remote_add("origin", remote);
 
     logger.info "fetching origin"
-    repo.remote_fetch("origin")
+    repo.git.native(:fetch, {:depth => 1}, "origin")
 
     logger.info "reset origin/master"
     # FIXME: If I do a hard reset here then I get checkouts
