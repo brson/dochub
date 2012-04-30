@@ -6,6 +6,10 @@ module Views
       @page.title == @page.name
     end
 
+    def name
+      @page.name
+    end
+
     def title
       @page.title
     end
