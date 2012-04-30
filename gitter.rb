@@ -83,9 +83,10 @@ class Gitter
     repo.remote_fetch("origin")
 
     logger.info "reset origin/master"
-    # FIXME: This --hard doesn't do anything and the working dir
-    # ends up not containing anything
-    repo.git.native(:reset, {:hard => true}, ["origin/master"])
+    # FIXME: If I do a hard reset here then I get checkouts
+    # to the top-level application directory, not the expected
+    # working directory
+    repo.git.native(:reset, {}, ["origin/master"])
   end
 
   def is_repo_ready(logger, user, repo)
