@@ -25,6 +25,21 @@ body {
     background-color: rgb(221, 221, 221);
 }
 
+#wiki-sidebar {
+    background-color: rgb(247, 247, 247);
+    border-radius: 5px;
+    border: 1px solid rgb(221, 221, 221);
+    margin-top: 54px;
+    padding: 10px;
+}
+
+#wiki-footer {
+    background-color: rgb(247, 247, 247);
+    border-radius: 5px;
+    border: 1px solid rgb(221, 221, 221);
+    padding: 10px;
+}
+
 .navbar {
     margin-bottom: 0px;
 }
@@ -51,7 +66,6 @@ body {
     margin-bottom: 2em;
     padding-left: 2em;
     padding-right: 2em;
-    padding-bottom: 2em;
     background-color: white;
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
