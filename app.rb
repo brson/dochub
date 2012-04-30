@@ -44,7 +44,6 @@ class App < Sinatra::Base
       @page = page
       @user = user
       @repo = repo
-      @name = name
       mustache :page
     else
       error_unknown_page(name)

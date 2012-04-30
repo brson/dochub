@@ -1,9 +1,13 @@
 module Views
   class Page < Layout
-    attr_reader :page, :user, :repo, :name
+    attr_reader :page, :user, :repo
 
     def needs_header
-      @page.title == name
+      @page.title == @page.name
+    end
+
+    def title
+      @page.title
     end
 
     def content
