@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'logger'
 require 'gollum'
+require 'grit'
 
 class Gitter
 
@@ -58,8 +59,43 @@ class Gitter
   end
 
   def clone(logger, user, repo)
-    logger.info "creating directory #{repo_path(user, repo)}"
-    FileUtils.mkdir_p(repo_path(user, repo))
+    if is_repo_ready(logger, user, repo)
+      logger.info "repo is already ready"
+      return
+    end
+
+    path = repo_path(user, repo)
+    remote = "git://github.com/#{user}/#{repo}.wiki"
+
+    logger.info "deleting directory #{path}"
+    FileUtils.rm_rf(path)
+
+    logger.info "creating directory #{path}"
+    FileUtils.mkdir_p(path)
+
+    logger.info "initing repo #{path}"
+    repo = Grit::Repo.init(path)
+
+    logger.info "adding remote " + remote
+    repo.remote_add("origin", remote);
+
+    logger.info "fetching origin"
+    repo.remote_fetch("origin")
+
+    logger.info "reset origin/master"
+    # FIXME: This --hard doesn't do anything and the working dir
+    # ends up not containing anything
+    repo.git.native(:reset, {:hard => true}, ["origin/master"])
+  end
+
+  def is_repo_ready(logger, user, repo)
+    begin
+      wiki = Gollum::Wiki.new(repo_path(user, repo))
+      wiki.exist?
+    rescue => error
+      logger.info "repo is not ready: " + error
+      false
+    end
   end
 
   private :worker
