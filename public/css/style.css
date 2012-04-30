@@ -7,6 +7,15 @@ body {
     background: #F8F8F8;
 }
 
+.navbar {
+    margin-bottom: 0px;
+}
+
+.navbar .brand {
+    float: right;
+}
+
+
 #main-container {
     margin-bottom: 2em;
     padding-left: 2em;
@@ -19,8 +28,4 @@ body {
     border-top-style: none;
     border-width: 1px;
     border-color: lightgray;
-}
-
-#githublink {
-    float: right;
 }
