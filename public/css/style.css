@@ -31,6 +31,7 @@ body {
     border: 1px solid rgb(221, 221, 221);
     margin-top: 54px;
     padding: 10px;
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.4), inset 0px 0px 40px rgba(0, 0, 0, 0.04);
 }
 
 #wiki-footer {
@@ -38,6 +39,7 @@ body {
     border-radius: 5px;
     border: 1px solid rgb(221, 221, 221);
     padding: 10px;
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.4), inset 0px 0px 40px rgba(0, 0, 0, 0.04);
 }
 
 .navbar {
