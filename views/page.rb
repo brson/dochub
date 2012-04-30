@@ -2,14 +2,8 @@ module Views
   class Page < Layout
     attr_reader :page, :user, :repo, :name
 
-    DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
-
-    def author
-      @page.version.author.name
-    end
-
-    def date
-      @page.version.authored_date.strftime(DATE_FORMAT)
+    def needs_header
+      @page.title == name
     end
 
     def content
