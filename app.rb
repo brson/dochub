@@ -36,6 +36,10 @@ class App < Sinatra::Base
     show_page_or_file(params[:user], params[:repo], 'Home')
   end
 
+  get '/:user/:repo/' do
+    show_page_or_file(params[:user], params[:repo], 'Home')
+  end
+
   def show_page_or_file(user, repo, name)
 
     wiki = settings.gitter.wiki(user, repo)
