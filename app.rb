@@ -21,7 +21,7 @@ class App < Sinatra::Base
   set :gitter, Gitter.new
 
   get '/' do
-    'Welcome to dochub'
+    show_page_or_file('brson', 'dochub', 'Home')
   end
 
   get '/:user/:repo/:name' do
