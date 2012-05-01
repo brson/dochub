@@ -11,16 +11,13 @@ class Gitter
   end
 
   def repo_path(user, repo)
-    "./data/#{user}/#{repo}.wiki"
+    "./data/#{user}/#{repo}.wiki.git"
   end
 
   def wiki(user, repo)
-    options = {
-      :base_path => "/#{user}/#{repo}/"
-    }
 
     begin
-      wiki = Gollum::Wiki.new(repo_path(user, repo), options)
+      wiki = new_wiki(user, repo)
     rescue Grit::NoSuchPathError, Grit::InvalidGitRepositoryError
       add_work_item({
         :op => :clone,
@@ -74,24 +71,18 @@ class Gitter
     FileUtils.mkdir_p(path)
 
     logger.info "initing repo #{path}"
-    repo = Grit::Repo.init(path)
+    repo = Grit::Repo.init_bare(path)
 
     logger.info "adding remote " + remote
     repo.remote_add("origin", remote);
 
     logger.info "fetching origin"
     repo.git.native(:fetch, {:depth => 1}, "origin")
-
-    logger.info "reset origin/master"
-    # FIXME: If I do a hard reset here then I get checkouts
-    # to the top-level application directory, not the expected
-    # working directory
-    repo.git.native(:reset, {}, ["origin/master"])
   end
 
   def is_repo_ready(logger, user, repo)
     begin
-      wiki = Gollum::Wiki.new(repo_path(user, repo))
+      wiki = new_wiki(user, repo)
       wiki.exist?
     rescue => error
       logger.info "repo is not ready: " + error
@@ -99,7 +90,17 @@ class Gitter
     end
   end
 
+  def new_wiki(user, repo)
+    options = {
+      :base_path => "/#{user}/#{repo}/",
+      :ref => "origin/master"
+    }
+
+    Gollum::Wiki.new(repo_path(user, repo), options)
+  end
+
   private :worker
   private :clone
+  private :new_wiki
 end
 
