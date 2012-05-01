@@ -33,6 +33,14 @@ class Gitter
     })
   end
 
+  def enqueue_fetch(user, repo)
+    add_work_item({
+                    :op => :fetch,
+                    :user => user,
+                    :repo => repo
+                  })
+  end
+
   def add_work_item(command)
     @workqueue.push(command)
   end
@@ -53,6 +61,11 @@ class Gitter
           repo = command[:repo]
           logger.info "executing clone #{user}/#{repo}"
           clone(logger, user, repo)
+        when :fetch
+          user = command[:user]
+          repo = command[:repo]
+          logger.info "executing fetch #{user}/#{repo}"
+          fetch(logger, user, repo)
         end
       rescue => error
         logger.error "executing command failed: " + error
@@ -89,6 +102,17 @@ class Gitter
 
   end
 
+  def fetch(logger, user, repo)
+    if !is_repo_ready(logger, user, repo)
+      logger.info "repo #{user}/#{repo} wasn't ready to fetch"
+      return
+    end
+
+    logger.info "fetching origin"
+    grepo = Grit::Repo.new(repo_path(user, repo))
+    grepo.git.native(:fetch, {:depth => 1, :raise => true}, "origin")
+  end
+
   def is_repo_ready(logger, user, repo)
     begin
       new_wiki(user, repo).exist?
@@ -109,6 +133,7 @@ class Gitter
 
   private :worker
   private :clone
+  private :fetch
   private :new_wiki
 end
 

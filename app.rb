@@ -24,6 +24,10 @@ class App < Sinatra::Base
     show_page_or_file('brson', 'dochub', 'Home')
   end
 
+  get '/:user/:repo/fetch' do
+    settings.gitter.enqueue_fetch(params[:user], params[:repo])
+  end
+
   get '/:user/:repo/:name' do
     show_page_or_file(params[:user], params[:repo], params[:name])
   end
