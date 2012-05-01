@@ -67,25 +67,28 @@ class Gitter
     logger.info "deleting directory #{path}"
     FileUtils.rm_rf(path)
 
-    logger.info "creating directory #{path}"
-    FileUtils.mkdir_p(path)
-
     logger.info "initing repo #{path}"
-    repo = Grit::Repo.init_bare(path)
+    grepo = Grit::Repo.init_bare(path)
 
     logger.info "adding remote " + remote
-    repo.remote_add("origin", remote);
+    grepo.remote_add("origin", remote);
 
     logger.info "fetching origin"
-    repo.git.native(:fetch, {:depth => 1}, "origin")
+    begin
+      grepo.git.native(:fetch, {:depth => 1, :raise => true}, "origin")
+    rescue => error
+      logger.error "couldn't fetch origin from #{user}/#{repo}" +
+        "because of " + error
+      FileUtils.rm_rf(path)
+    end
+
   end
 
   def is_repo_ready(logger, user, repo)
     begin
-      wiki = new_wiki(user, repo)
-      wiki.exist?
+      new_wiki(user, repo).exist?
     rescue => error
-      logger.info "repo is not ready: " + error
+      logger.info "repo #{user}/#{repo} is not ready: " + error
       false
     end
   end
