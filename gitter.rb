@@ -73,7 +73,7 @@ class Gitter
 
       delay = 2
       logger.info "sleeping #{delay} s"
-      sleep 2
+      sleep delay
     end
   end
 
