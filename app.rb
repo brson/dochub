@@ -25,7 +25,7 @@ class App < Sinatra::Base
   end
 
   get '/:user/:repo/fetch' do
-    settings.gitter.enqueue_fetch(params[:user], params[:repo])
+    settings.gitter.fetch(params[:user], params[:repo])
   end
 
   get '/:user/:repo/:name' do

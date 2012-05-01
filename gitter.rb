@@ -20,20 +20,20 @@ class Gitter
       wiki = new_wiki(user, repo)
     rescue Grit::NoSuchPathError, Grit::InvalidGitRepositoryError
       # Get it ready for next time
-      enqueue_clone(user, repo)
+      clone(user, repo)
       return nil
     end
   end
 
-  def enqueue_clone(user, repo)
+  def clone(user, repo)
     add_work_item({
-      :op => :clone,
-      :user => user,
-      :repo => repo
-    })
+                    :op => :clone,
+                    :user => user,
+                    :repo => repo
+                  })
   end
 
-  def enqueue_fetch(user, repo)
+  def fetch(user, repo)
     add_work_item({
                     :op => :fetch,
                     :user => user,
@@ -60,12 +60,12 @@ class Gitter
           user = command[:user]
           repo = command[:repo]
           logger.info "executing clone #{user}/#{repo}"
-          clone(logger, user, repo)
+          do_clone(logger, user, repo)
         when :fetch
           user = command[:user]
           repo = command[:repo]
           logger.info "executing fetch #{user}/#{repo}"
-          fetch(logger, user, repo)
+          do_fetch(logger, user, repo)
         end
       rescue => error
         logger.error "executing command failed: " + error
@@ -73,7 +73,7 @@ class Gitter
     end
   end
 
-  def clone(logger, user, repo)
+  def do_clone(logger, user, repo)
     if is_repo_ready(logger, user, repo)
       logger.info "repo is already ready"
       return
@@ -102,7 +102,7 @@ class Gitter
 
   end
 
-  def fetch(logger, user, repo)
+  def do_fetch(logger, user, repo)
     if !is_repo_ready(logger, user, repo)
       logger.info "repo #{user}/#{repo} wasn't ready to fetch"
       return
@@ -132,8 +132,8 @@ class Gitter
   end
 
   private :worker
-  private :clone
-  private :fetch
+  private :do_clone
+  private :do_fetch
   private :new_wiki
 end
 
