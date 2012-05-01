@@ -19,13 +19,18 @@ class Gitter
     begin
       wiki = new_wiki(user, repo)
     rescue Grit::NoSuchPathError, Grit::InvalidGitRepositoryError
-      add_work_item({
-        :op => :clone,
-        :user => user,
-        :repo => repo
-      })
+      # Get it ready for next time
+      enqueue_clone(user, repo)
       return nil
     end
+  end
+
+  def enqueue_clone(user, repo)
+    add_work_item({
+      :op => :clone,
+      :user => user,
+      :repo => repo
+    })
   end
 
   def add_work_item(command)
