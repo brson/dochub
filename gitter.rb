@@ -70,10 +70,6 @@ class Gitter
       rescue => error
         logger.error "executing command failed: " + error
       end
-
-      delay = 2
-      logger.info "sleeping #{delay} s"
-      sleep delay
     end
   end
 
