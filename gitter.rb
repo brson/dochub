@@ -85,11 +85,15 @@ class Gitter
       return
     end
 
-    path = repo_path(user, repo)
+    path = repo_path(user, repo) + ".tmp"
+    final_path = repo_path(user, repo)
     remote = "git://github.com/#{user}/#{repo}.wiki"
 
     logger.info "deleting directory #{path}"
     FileUtils.rm_rf(path)
+
+    logger.info "deleting directory #{final_path}"
+    FileUtils.rm_rf(final_path)
 
     logger.info "initing repo #{path}"
     grepo = Grit::Repo.init_bare(path)
@@ -103,6 +107,14 @@ class Gitter
     rescue => error
       logger.error "couldn't fetch origin from #{user}/#{repo}" +
         "because of " + error
+      FileUtils.rm_rf(path)
+    end
+
+    logger.info "moving repo into place"
+    begin
+      FileUtils.mv(path, final_path)
+    rescue => error
+      FileUtils.rm_rf(final_path)
       FileUtils.rm_rf(path)
     end
 
