@@ -24,8 +24,13 @@ class App < Sinatra::Base
     show_page_or_file('brson', 'dochub', 'Home')
   end
 
-  get '/:user/:repo/fetch' do
+  get '/:user/:repo/fetch.apicmd' do
     settings.gitter.fetch(params[:user], params[:repo])
+  end
+
+  get '/:user/:repo/clone.apicmd' do
+    settings.gitter.clone(params[:user], params[:repo])
+    "Cloning"
   end
 
   get '/:user/:repo/:name' do
