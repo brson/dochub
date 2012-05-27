@@ -20,9 +20,7 @@ class Gitter
     begin
       wiki = new_wiki(user, repo)
     rescue Grit::NoSuchPathError, Grit::InvalidGitRepositoryError
-      @logger.info "don't have #{user}/#{repo}. enqueuing"
-      # Get it ready for next time
-      clone(user, repo)
+      @logger.info "don't have #{user}/#{repo}"
       return nil
     end
   end

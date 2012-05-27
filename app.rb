@@ -45,7 +45,7 @@ class App < Sinatra::Base
     wiki = settings.gitter.wiki(user, repo)
 
     if !wiki
-      return error_unknown_repo(user, repo)
+      return clone_repo_show_page(user, repo, name)
     end
 
     if page = wiki.page(name)
@@ -58,7 +58,8 @@ class App < Sinatra::Base
     end
   end
 
-  def error_unknown_repo(user, repo)
+  def clone_repo_show_page(user, repo, name)
+    settings.gitter.clone(user, repo)
     "I don't know #{user} / #{repo} yet"
   end
 
