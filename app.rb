@@ -60,7 +60,11 @@ class App < Sinatra::Base
 
   def clone_repo_show_page(user, repo, name)
     settings.gitter.clone(user, repo)
-    "I don't know #{user} / #{repo} yet"
+
+    @user = user
+    @repo = repo
+    @name = name
+    mustache :clone
   end
 
   def error_unknown_page(name)
