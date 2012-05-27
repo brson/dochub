@@ -102,12 +102,14 @@ class Gitter
       logger.error "couldn't fetch origin from #{user}/#{repo}" +
         "because of " + error
       FileUtils.rm_rf(path)
+      return
     end
 
     logger.info "moving repo into place"
     begin
       FileUtils.mv(path, final_path)
     rescue => error
+      logger.error "couldn't move repo #{user}/#{repo} " + error
       FileUtils.rm_rf(final_path)
       FileUtils.rm_rf(path)
     end
