@@ -68,8 +68,6 @@ class App < Sinatra::Base
   end
 
   def clone_repo_show_page(user, repo, name)
-    settings.gitter.clone(user, repo)
-
     @user = user
     @repo = repo
     @name = name
