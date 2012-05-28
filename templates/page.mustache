@@ -14,7 +14,12 @@
   <div id="main-container" class="container">
 
     <div class="row">
+      {{#has_sidebar}}
       <div id="wiki-content" class="span8">
+      {{/has_sidebar}}
+      {{^has_sidebar}}
+      <div id="wiki-content" class="span12">
+      {{/has_sidebar}}
 
 	{{#needs_header}}
 	<h1>{{title}}</h1>
@@ -24,13 +29,16 @@
 
       </div>
 
+      {{#has_sidebar}}
       <div class="span4">
 	<div id="wiki-sidebar">
 	  {{{sidebar_content}}}
 	</div>
       </div>
+      {{/has_sidebar}}
     </div>
 
+    {{#has_footer}}
     <div class="row">
       <div class="span12">
 	<div id="wiki-footer">
@@ -38,6 +46,7 @@
 	</div>
       </div>
     </div>
+    {{/has_footer}}
 
   </div> <!-- main-container -->
 
