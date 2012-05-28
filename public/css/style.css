@@ -1,9 +1,4 @@
-p {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-pre {
+p, pre {
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -13,49 +8,33 @@ pre {
     margin-bottom: 2em;
 }
 
+h1, h2, h3, h4 {
+    margin: 14px 0px 5px;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
 h1 {
-    margin: 14px 0px 5px;
-    font-size: 30px;
     line-height: normal;
-    border-bottom: 1px solid rgb(204, 204, 204);
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 20px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    margin: 14px 0px 5px;
-    border-bottom: 1px solid rgb(204, 204, 204);
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 20px rgba(0, 0, 0, 0.1);
-}
-
-h3 {
-    margin: 14px 0px 5px;
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 20px rgba(0, 0, 0, 0.1);
-}
-
-h4 {
-    margin: 14px 0px 5px;
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
 body {
     background-color: rgb(221, 221, 221);
 }
 
-#wiki-sidebar {
+#wiki-sidebar, #wiki-footer {
     background-color: rgb(247, 247, 247);
     border-radius: 5px;
     border: 1px solid rgb(221, 221, 221);
-    margin-top: 54px;
     padding: 10px;
     box-shadow: inset 0px 0px 40px rgba(0, 0, 0, 0.04);
 }
 
-#wiki-footer {
-    background-color: rgb(247, 247, 247);
-    border-radius: 5px;
-    border: 1px solid rgb(221, 221, 221);
-    padding: 10px;
-    box-shadow: inset 0px 0px 40px rgba(0, 0, 0, 0.04);
+#wiki-sidebar {
+    margin-top: 54px;
 }
 
 .navbar {
