@@ -59,9 +59,8 @@ body {
 
 
 #main-container {
-    margin-bottom: 2em;
-    padding-left: 2em;
-    padding-right: 2em;
+    padding-left: 3em;
+    padding-right: 3em;
     background-color: white;
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
@@ -69,5 +68,5 @@ body {
     border-top-style: none;
     border-width: 1px;
     border-color: rgb(202, 202, 202);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.4), 1px 0px 0px rgba(255, 255, 255, 0.4), -1px 1px 0px rgba(255, 255, 255, 0.4);
 }
