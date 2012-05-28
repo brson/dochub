@@ -2,6 +2,7 @@ require 'grit'
 require 'sinatra/base'
 require 'mustache/sinatra'
 require 'gitter'
+require 'json'
 
 class App < Sinatra::Base
   register Mustache::Sinatra
@@ -25,12 +26,15 @@ class App < Sinatra::Base
   end
 
   get '/:user/:repo/fetch.apicmd' do
-    settings.gitter.fetch(params[:user], params[:repo])
+    content_type :json
+    result_queue = settings.gitter.fetch(params[:user], params[:repo])
+    result_queue.pop.to_json
   end
 
   get '/:user/:repo/clone.apicmd' do
-    settings.gitter.clone(params[:user], params[:repo])
-    "Cloning"
+    content_type :json
+    result_queue = settings.gitter.clone(params[:user], params[:repo])
+    result_queue.pop.to_json
   end
 
   get '/:user/:repo/:name' do
