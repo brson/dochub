@@ -9,4 +9,4 @@ rm -rf dochub
 git clone git://github.com/brson/dochub && \
 cd dochub && \
 sudo bundle install && \
-rackup &
+/var/lib/gems/1.8/bin/rackup &
