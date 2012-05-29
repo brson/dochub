@@ -41,6 +41,8 @@ body {
 }
 
 .navbar-inner {
+    background-image: none;
+    background-color: rgb(234, 234, 234);
     background: -moz-linear-gradient(rgb(250, 250, 250), rgb(234, 234, 234)) repeat scroll 0% 0% transparent;
     position: relative;
     z-index: 10;
