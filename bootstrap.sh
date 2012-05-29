@@ -5,7 +5,7 @@
 
 cd && \
 sudo apt-get install -y git rubygems1.8 ruby-bundler libxml2-dev libxslt1-dev && \
-rm -rf dochub
+rm -rf dochub && \
 git clone git://github.com/brson/dochub && \
 cd dochub && \
 sudo bundle install && \
